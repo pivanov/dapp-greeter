@@ -1,0 +1,1 @@
+forge script script/Greeter.s.sol --broadcast --rpc-url http://localhost:8545 --keystore ~/.foundry/keystores/greeter --password $KEYSTORE_PASSWORD

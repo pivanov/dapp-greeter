@@ -1,8 +1,8 @@
-import { Signer, ethers } from 'ethers';
+import { ethers } from 'ethers';
 import { useState, useEffect } from 'react';
 import GreeterABI from './abis/Greeter.json';
 
-const greeterAddress = "0x0165878A594ca255338adfa4d48449f69242Eb8F";
+const greeterAddress = "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0";
 
 export const Greeter = () => {
   const [greeter, setGreeterValue] = useState('');
@@ -21,8 +21,8 @@ export const Greeter = () => {
       const provider = new ethers.BrowserProvider(window.ethereum);
       const contract = new ethers.Contract(greeterAddress, GreeterABI.abi, provider);
       try {
-        console.log('@@@ data', contract);
         const data = await contract.greet();
+        console.log('@@@ data', data);
         setGreeterValue(data);
       } catch (error) {
         console.log(error);

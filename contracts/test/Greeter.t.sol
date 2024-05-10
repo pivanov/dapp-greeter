@@ -15,17 +15,28 @@ contract GreeterTest is Test {
         greeter = new Greeter(initialGreeting, address(counter)); // Pass Counter address to Greeter
     }
 
-    function testInitialGreeting() public view {
-        // This test should check the personalized greeting retrieval
+    function test_InitialGreeting() public view {
         string memory retrievedGreeting = greeter.greet();
-        assertEq(retrievedGreeting, initialGreeting); // This assumes the sender has set the initial greeting
+        assertEq(retrievedGreeting, initialGreeting);
     }
 
-    function testSetGreeting() public {
+    function test_SetGreeting() public {
         string memory newGreeting = "Hello, Foundry!";
+
         greeter.setGreeting(newGreeting);
-        assertEq(greeter.greet(), newGreeting); // Check if the new greeting is set correctly
-        uint256 userCount = counter.getCount(address(this)); // Check the interaction with Counter
-        assertEq(userCount, 1); // Should be 1 as this is the first time setting greeting in this test
+        assertEq(greeter.greet(), newGreeting);
+
+        uint256 userCount = counter.getCount(address(this));
+        assertEq(userCount, 1);
+    }
+
+    function test_GetCount() public view {
+        uint256 count = greeter.getCount();
+        assertEq(count, 0);
+    }
+
+    function test_GetMessageCount() public {
+        uint256 messageCount = greeter.getMessageCount();
+        assertEq(messageCount, 0);
     }
 }

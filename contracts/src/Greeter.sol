@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: UNLICENSED
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.13;
 
 import { console } from "forge-std/console.sol";
@@ -46,7 +46,8 @@ contract Greeter {
     }
 
 
-    function getCount() public returns (uint256) {
+    function getCount() public view returns (uint256) {
+        require(msg.sender != address(this), "Caller cannot be the contract itself");
         return counter.getCount(msg.sender);
     }
 

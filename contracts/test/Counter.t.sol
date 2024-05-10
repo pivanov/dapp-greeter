@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: UNLICENSED
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.13;
 
 import {Test, console} from "forge-std/Test.sol";
@@ -21,7 +21,7 @@ contract CounterTest is Test {
         assertEq(newCount, initialCount + 1);
     }
 
-    function testFuzz_IncrementCountByUser(address user) public {
+    function test_IncrementCountByUser(address user) public {
         uint256 initialCount = counter.getCount(user);
         counter.incrementCount(user);
         assertEq(counter.getCount(user), initialCount + 1);

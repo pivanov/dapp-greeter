@@ -6,19 +6,24 @@ import {Counter} from "../src/Counter.sol";
 
 contract CounterTest is Test {
     Counter public counter;
+    address testUser = address(0x123); // Example test address
 
     function setUp() public {
         counter = new Counter();
-        counter.setNumber(0);
+        // Initialize count for the test user if necessary
+        counter.incrementCount(testUser); // Start the count at 1 for simplicity
     }
 
-    function test_Increment() public {
-        counter.increment();
-        assertEq(counter.number(), 1);
+    function test_IncrementCount() public {
+        uint256 initialCount = counter.getCount(testUser);
+        counter.incrementCount(testUser);
+        uint256 newCount = counter.getCount(testUser);
+        assertEq(newCount, initialCount + 1);
     }
 
-    function testFuzz_SetNumber(uint256 x) public {
-        counter.setNumber(x);
-        assertEq(counter.number(), x);
+    function testFuzz_IncrementCountByUser(address user) public {
+        uint256 initialCount = counter.getCount(user);
+        counter.incrementCount(user);
+        assertEq(counter.getCount(user), initialCount + 1);
     }
 }

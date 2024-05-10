@@ -1,3 +1,3 @@
-cp ./out/Greeter.sol/Greeter.json ../app/src/abis/Greeter.json
+cp ./out/Greeter.sol/Greeter.json ./app/src/abis/Greeter.json
 
 forge script script/Greeter.s.sol --broadcast --rpc-url http://localhost:8545 --keystore ~/.foundry/keystores/greeter --password $KEYSTORE_PASSWORD
